@@ -3,7 +3,6 @@ include 'config/database.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
-`
 
 <head>
     <meta charset="UTF-8">
@@ -25,6 +24,26 @@ include 'config/database.php';
         <section class="task-list">
             <h2>Tugas saya</h2>
             <div id="tasks" class="">
+                <?php
+                // code sql mengambil data pada tabel tugas
+                $sql = "SELECT * FROM tugas ORDER BY tgl_buat DESC";
+                $query_tugas = mysqli_query($conn, $sql);
+                // num rows: hitung data
+                $hitung_data_tabel_barang = mysqli_num_rows($query_tugas);
+                if ($hitung_data_tabel_barang != 0) {
+                    while ($dt = mysqli_fetch_assoc($query_tugas)) {
+                        echo '<div class="task">
+                            <div class="content">
+                                <input type="text" class="text" id="txtketerangan_' . $dt['id'] . '" value="' . $dt['keterangan'] . '" readonly>
+                            </div>
+                            <div class="action">
+                                <button id="btnedit_' . $dt['id'] . '" class="edit" onclick="click_edit(event)" data-id="' . $dt['id'] . '">Edit</button>
+                                <button onclick="click_hapus(\'' . $dt['id'] . '\')" id="btndelete_' . $dt['id'] . '" class="delete">Hapus</button>
+                            </div>
+                        </div>';
+                    }
+                }
+                ?>
                 <!-- code ddibawah ini akan dilakukan LOOPing sesuai data -->
                 <!-- <div class="task">
                     <div class="content">
