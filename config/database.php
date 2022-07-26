@@ -1,6 +1,6 @@
 <?php
-// session_start();
-// $base_url = "http://localhost/php/todo-list-pra/";
+session_start();
+$base_url = "http://localhost/php/todo-list/";
 $conn = mysqli_connect('127.0.0.1', 'root', '', 'app_todo-list');
 // cek koneksi db
 if (!$conn) {
